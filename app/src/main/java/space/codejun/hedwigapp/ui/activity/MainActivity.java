@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
         binding.homeButton.setBackgroundResource(R.drawable.gradient_main_button);
         binding.statsButtonImage.setBackgroundResource(R.drawable.ic_insert_chart_gray);
         binding.messageButtonImage.setBackgroundResource(R.drawable.ic_message_gray);
+        fragment = new HomeFragment();
+        commitFragment();
 
         binding.homeButton.setOnClickListener(view -> { //홈버튼 클릭
             binding.homeButton.setBackgroundResource(R.drawable.gradient_main_button);
