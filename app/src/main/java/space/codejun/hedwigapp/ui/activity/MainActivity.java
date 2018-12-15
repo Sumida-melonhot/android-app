@@ -6,14 +6,20 @@ import androidx.databinding.DataBindingUtil;
 import space.codejun.hedwigapp.R;
 import space.codejun.hedwigapp.data.TestData;
 import space.codejun.hedwigapp.databinding.ActivityMainBinding;
+import space.codejun.hedwigapp.ui.fragment.HomeFragment;
+import space.codejun.hedwigapp.ui.fragment.MessageFragment;
+import space.codejun.hedwigapp.ui.fragment.StatsFragment;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 
 import static space.codejun.hedwigapp.network.HedwigRequestReturn.getTestData;
 import static space.codejun.hedwigapp.network.HedwigRequestReturn.getTestData1;
 
 public class MainActivity extends AppCompatActivity {
-
+    private androidx.fragment.app.Fragment fragment = new HomeFragment();
     private ActivityMainBinding binding;
 
     @Override
@@ -40,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
             binding.messageButton.setBackgroundResource(0);
             binding.messageButtonImage.setBackgroundResource(R.drawable.ic_message_gray);
 
-            //TODO 태일이는 여기다 레이아웃 교체소스
+            fragment = new HomeFragment();
+            commitFragment();
         });
 
         binding.statsButton.setOnClickListener(view -> { //통계버튼 클릭
@@ -53,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
             binding.messageButton.setBackgroundResource(0);
             binding.messageButtonImage.setBackgroundResource(R.drawable.ic_message_gray);
 
-            //TODO 태일이는 여기다 레이아웃 교체소스
+            fragment = new StatsFragment();
+            commitFragment();
         });
 
         binding.messageButton.setOnClickListener(view -> {
@@ -66,8 +74,16 @@ public class MainActivity extends AppCompatActivity {
             binding.statsButton.setBackgroundResource(0);
             binding.statsButtonImage.setBackgroundResource(R.drawable.ic_insert_chart_gray);
 
-            //TODO 태일이는 여기다 레이아웃 교체소스
+            fragment = new MessageFragment();
+            commitFragment();
         });
 
+    }
+
+    private void commitFragment() { //TODO boolean return check
+        androidx.fragment.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        androidx.fragment.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.main_frame, fragment);
+        fragmentTransaction.commit();
     }
 }
