@@ -1,5 +1,6 @@
 package space.codejun.hedwigapp.ui.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import space.codejun.hedwigapp.R;
@@ -8,15 +9,40 @@ import space.codejun.hedwigapp.ui.fragment.HomeFragment;
 import space.codejun.hedwigapp.ui.fragment.MessageFragment;
 import space.codejun.hedwigapp.ui.fragment.StatsFragment;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
     private androidx.fragment.app.Fragment fragment = new HomeFragment();
     private ActivityMainBinding binding;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        CollectionReference count = db.collection("count");
+
+        count.document("tear")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if(task.isSuccessful()) {
+                        Log.d("firestore", task.getResult().getData().get("count").toString());
+                        Toast.makeText(this, task.getResult().getData().get("count").toString(), Toast.LENGTH_LONG);
+
+                    }
+                });
+
+        count.document("hukurou")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if(task.isSuccessful()) {
+                        Log.d("firestore", task.getResult().getData().get("count").toString());
+                        Toast.makeText(this, task.getResult().getData().get("count").toString(), Toast.LENGTH_LONG);
+                    }
+                });
 
         binding.homeButtonImage.setBackgroundResource(R.drawable.ic_home_white);
         binding.homeButton.setBackgroundResource(R.drawable.gradient_main_button);
