@@ -3,4 +3,8 @@
     <string name="nomal_mode">普通モード</string>
     <string name="stats">統計</string>
     <string name="message">単語リスト</string>
+    <string name="input_add_word">追加する単語を\n入力してください。</string>
+    <string name="add_word_explain">最大５字まで入力可能です。</string>
+    <string name="add">追加</string>
+    <string name="input_word">単語を入力　</string>
 </resources>
