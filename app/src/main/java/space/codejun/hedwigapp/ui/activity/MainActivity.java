@@ -1,22 +1,13 @@
 package space.codejun.hedwigapp.ui.activity;
 
-import androidx.annotation.IdRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import space.codejun.hedwigapp.R;
-import space.codejun.hedwigapp.data.TestData;
 import space.codejun.hedwigapp.databinding.ActivityMainBinding;
 import space.codejun.hedwigapp.ui.fragment.HomeFragment;
 import space.codejun.hedwigapp.ui.fragment.MessageFragment;
 import space.codejun.hedwigapp.ui.fragment.StatsFragment;
-
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
-
-import static space.codejun.hedwigapp.network.HedwigRequestReturn.getTestData;
-import static space.codejun.hedwigapp.network.HedwigRequestReturn.getTestData1;
 
 public class MainActivity extends AppCompatActivity {
     private androidx.fragment.app.Fragment fragment = new HomeFragment();
@@ -26,10 +17,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-
-        //test code
-//        TestData data = getTestData("asd");
-//        TestData data1 = getTestData1("hkjk");
 
         binding.homeButtonImage.setBackgroundResource(R.drawable.ic_home_white);
         binding.homeButton.setBackgroundResource(R.drawable.gradient_main_button);
@@ -80,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void commitFragment() { //TODO boolean return check
+    private void commitFragment() {
         androidx.fragment.app.FragmentManager fragmentManager = getSupportFragmentManager();
         androidx.fragment.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.main_frame, fragment);
