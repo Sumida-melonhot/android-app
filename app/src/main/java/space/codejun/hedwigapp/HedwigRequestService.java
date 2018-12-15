@@ -1,4 +1,4 @@
 package space.codejun.hedwigapp;
 
-interface HedwigRequestService {
+public interface HedwigRequestService {
 }
