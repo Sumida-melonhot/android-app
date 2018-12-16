@@ -8,9 +8,15 @@ import space.codejun.hedwigapp.databinding.ActivityMainBinding;
 import space.codejun.hedwigapp.ui.fragment.HomeFragment;
 import space.codejun.hedwigapp.ui.fragment.MessageFragment;
 import space.codejun.hedwigapp.ui.fragment.StatsFragment;
+
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
+
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -23,12 +29,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
         CollectionReference count = db.collection("count");
 
         count.document("tear")
                 .get()
                 .addOnCompleteListener(task -> {
-                    if(task.isSuccessful()) {
+                    if (task.isSuccessful()) {
                         Log.d("firestore", task.getResult().getData().get("count").toString());
                         Toast.makeText(this, task.getResult().getData().get("count").toString(), Toast.LENGTH_LONG);
 
@@ -38,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         count.document("hukurou")
                 .get()
                 .addOnCompleteListener(task -> {
-                    if(task.isSuccessful()) {
+                    if (task.isSuccessful()) {
                         Log.d("firestore", task.getResult().getData().get("count").toString());
                         Toast.makeText(this, task.getResult().getData().get("count").toString(), Toast.LENGTH_LONG);
                     }

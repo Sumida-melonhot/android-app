@@ -1,6 +1,8 @@
 package space.codejun.hedwigapp.data;
 
-public class TestData {
+import java.io.Serializable;
+
+public class TestData implements Serializable {
     private String testString;
     private int testInt;
 

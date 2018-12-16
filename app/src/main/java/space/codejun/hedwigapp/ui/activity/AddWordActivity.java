@@ -2,6 +2,10 @@ package space.codejun.hedwigapp.ui.activity;
 
 import android.os.Bundle;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,11 +16,13 @@ import space.codejun.hedwigapp.databinding.ActivityAddWordBinding;
 public class AddWordActivity extends AppCompatActivity {
 
     private ActivityAddWordBinding binding;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_word);
+        db = FirebaseFirestore.getInstance();
 
         binding.backButton.setOnClickListener(view -> finish());
 
@@ -31,6 +37,9 @@ public class AddWordActivity extends AppCompatActivity {
 
                 //TODO 파베 추가 ㄱ
                 //binding.addWordInputText.getText().toString();
+                Map<String, Object> data = new HashMap<>();
+                data.put("count", 1);
+                db.collection("word").document(binding.addWordInputText.getText().toString()).set(data);
 
             }
         });
